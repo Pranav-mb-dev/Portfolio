@@ -1,0 +1,6 @@
+com\portfolio\backend\dto\ContactRequest.class
+com\portfolio\backend\exception\GlobalExceptionHandler.class
+com\portfolio\backend\repository\ContactSubmissionRepository.class
+com\portfolio\backend\controller\ContactController.class
+com\portfolio\backend\model\ContactSubmission.class
+com\portfolio\backend\PortfolioBackendApplication.class

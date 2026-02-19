@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Meta Tags -->
+  <title>Pranav Bhargav M | Backend Software Engineer</title>
+  <meta name="description"
+    content="Backend software engineer specializing in scalable APIs, distributed systems, and cloud infrastructure. Open to new opportunities." />
+  <meta name="author" content="Pranav Bhargav M" />
+  <meta name="keywords" content="backend engineer, software developer, API design, Java, Python, cloud" />
+
+  <!-- Open Graph (social sharing) -->
+  <meta property="og:title" content="Pranav Bhargav M | Backend Software Engineer" />
+  <meta property="og:description"
+    content="Backend software engineer specializing in scalable APIs, distributed systems, and cloud infrastructure." />
+  <meta property="og:type" content="website" />
+
+  <!-- Favicon placeholder — replace with your own -->
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- =============================================
+         SKIP LINK — accessibility: lets keyboard users
+         jump straight to main content
+    ============================================= -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Custom cursor: canvas for particle trail + dot for exact position -->
+  <canvas id="cursor-canvas" aria-hidden="true"></canvas>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+
+  <!-- Ambient background: animated gradient orbs + dot grid -->
+  <div class="bg-orb bg-orb--1" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb--2" aria-hidden="true"></div>
+  <div class="bg-orb bg-orb--3" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <!-- =============================================
+         NAVIGATION
+         Sticky top nav with smooth-scroll links.
+         The hamburger menu is toggled by script.js.
+    ============================================= -->
+  <header class="site-header" role="banner">
+    <nav class="nav container" aria-label="Primary navigation">
+      <!-- Logo / name -->
+      <a href="#hero" class="nav__logo" aria-label="Pranav Bhargav M — home">
+        Pranav
+      </a>
+
+      <!-- Desktop nav links -->
+      <ul class="nav__links" role="list">
+        <li><a href="#skills" class="nav__link">Skills</a></li>
+        <li><a href="#projects" class="nav__link">Projects</a></li>
+        <li><a href="#about" class="nav__link">About</a></li>
+        <li><a href="#contact" class="nav__link">Contact</a></li>
+      </ul>
+
+      <!-- CTA button -->
+      <a href="assets/resume.pdf" class="btn btn--outline btn--sm" target="_blank" rel="noopener" id="nav-resume-btn">
+        Resume ↗
+      </a>
+
+      <!-- Hamburger toggle (mobile only) -->
+      <button class="nav__hamburger" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false"
+        aria-controls="mobile-menu">
+        <span class="hamburger__bar" aria-hidden="true"></span>
+        <span class="hamburger__bar" aria-hidden="true"></span>
+        <span class="hamburger__bar" aria-hidden="true"></span>
+      </button>
+    </nav>
+
+    <!-- Mobile menu drawer -->
+    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Mobile navigation" aria-hidden="true">
+      <ul class="mobile-menu__links" role="list">
+        <li><a href="#skills" class="mobile-menu__link">Skills</a></li>
+        <li><a href="#projects" class="mobile-menu__link">Projects</a></li>
+        <li><a href="#about" class="mobile-menu__link">About</a></li>
+        <li><a href="#contact" class="mobile-menu__link">Contact</a></li>
+        <li>
+          <a href="assets/resume.pdf" class="btn btn--outline btn--sm mobile-menu__cta" target="_blank" rel="noopener"
+            id="mobile-resume-btn">
+            Resume ↗
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- =============================================
+         MAIN CONTENT
+    ============================================= -->
+  <main id="main-content">
+
+    <!-- ==========================================
+           HERO SECTION
+           Introduces the engineer with a tagline,
+           short bio, and primary CTAs.
+      ========================================== -->
+    <section class="hero" id="hero" aria-labelledby="hero-heading">
+      <!-- Subtle grid background (CSS only, no images) -->
+      <div class="hero__bg" aria-hidden="true"></div>
+
+      <div class="container hero__layout">
+
+        <!-- Left: text content -->
+        <div class="hero__content">
+          <!-- Status badge -->
+          <div class="hero__badge">
+            <span class="badge__dot" aria-hidden="true"></span>
+            <span>Available for opportunities</span>
+          </div>
+
+          <h1 class="hero__name" id="hero-heading">
+            Hi, I'm <span class="text-accent">Pranav Bhargav M</span>
+          </h1>
+
+          <p class="hero__title">
+            Backend Software Engineer
+          </p>
+
+          <!-- Typed tagline — script.js cycles through these -->
+          <p class="hero__tagline" aria-live="polite">
+            I build <span class="hero__typed" id="typed-text" aria-label="scalable APIs"></span>
+          </p>
+
+          <p class="hero__bio">
+            2 years of designing backend systems —
+            REST APIs. I care about clean code, observability,
+            and systems that scale gracefully under pressure.
+          </p>
+
+          <div class="hero__actions">
+            <a href="#projects" class="btn btn--primary" id="hero-projects-btn">View Projects</a>
+            <a href="#contact" class="btn btn--ghost" id="hero-contact-btn">Get in Touch</a>
+          </div>
+
+          <!-- Quick social links -->
+          <div class="hero__socials" aria-label="Social links">
+            <a href="https://github.com/Pranav-mb-dev" target="_blank" rel="noopener" class="social-link"
+              aria-label="GitHub profile" id="hero-github-link">
+              <!-- GitHub SVG icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                aria-hidden="true">
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+            </a>
+            <a href="https://linkedin.com/in/" target="_blank" rel="noopener" class="social-link"
+              aria-label="LinkedIn profile" id="hero-linkedin-link">
+              <!-- LinkedIn SVG icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                aria-hidden="true">
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </a>
+            <a href="mailto:pranavmahe06@gmail.com" class="social-link" aria-label="Send email" id="hero-email-link">
+              <!-- Email SVG icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                aria-hidden="true">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+            </a>
+          </div>
+        </div><!-- /.hero__content -->
+
+        <!-- Right: profile photo -->
+        <!--
+          TO USE YOUR REAL PHOTO: place your image at assets/photo.jpg
+          then replace the placeholder div below with:
+          <img src="assets/photo.jpg" alt="Photo of Alex Morgan" class="hero__photo" />
+        -->
+        <div class="hero__photo-wrap" aria-hidden="true">
+          <div class="hero__photo-placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.35">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span>Your photo here</span>
+          </div>
+        </div>
+
+      </div><!-- /.hero__layout -->
+
+      <!-- Scroll indicator -->
+      <a href="#skills" class="hero__scroll-hint" aria-label="Scroll to Skills section">
+        <span aria-hidden="true">↓</span>
+      </a>
+    </section>
+
+    <!-- ==========================================
+           SKILLS SECTION
+           Grouped by category for clarity.
+           Data is defined in script.js so it can
+           later be fetched from an API endpoint.
+      ========================================== -->
+    <section class="skills section" id="skills" aria-labelledby="skills-heading">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">What I work with</span>
+          <h2 class="section__title" id="skills-heading">Skills &amp; Technologies</h2>
+          <p class="section__subtitle">
+            A curated set of tools and technologies I use to build reliable,
+            production-ready backend systems.
+          </p>
+        </div>
+
+        <!--
+            Skill cards are rendered by script.js from the SKILLS_DATA array.
+            This makes it trivial to update or fetch skills from an API later.
+          -->
+        <div class="skills__grid" id="skills-grid" role="list" aria-label="Skills by category">
+          <!-- Populated by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+           PROJECTS SECTION
+           Project cards with tech tags, links, and
+           a brief description. Data lives in script.js.
+      ========================================== -->
+    <section class="projects section" id="projects" aria-labelledby="projects-heading">
+      <div class="container">
+        <div class="section__header">
+          <span class="section__label">What I've built</span>
+          <h2 class="section__title" id="projects-heading">Featured Projects</h2>
+          <p class="section__subtitle">
+            A selection of backend projects — from high-throughput APIs to
+            distributed data pipelines.
+          </p>
+
+          <!-- Big centered diamond toggle button -->
+          <div class="projects__toggle-wrap">
+            <button class="projects__toggle" id="projects-toggle-btn" aria-expanded="false"
+              aria-controls="projects-content" aria-label="Show projects">
+              <svg class="projects__toggle-icon" xmlns="http://www.w3.org/2000/svg" width="36" height="36"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Collapsible content -->
+        <div class="projects__content" id="projects-content">
+          <!-- Filter tabs -->
+          <div class="projects__filters" role="tablist" aria-label="Filter projects by category" id="project-filters">
+            <!-- Populated by script.js -->
+          </div>
+
+          <!--
+              Project cards are rendered by script.js from the PROJECTS_DATA array.
+              Replace with a fetch() call to /api/projects when a backend is ready.
+            -->
+          <div class="projects__grid" id="projects-grid" role="list" aria-label="Project list">
+            <!-- Populated by script.js -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+           ABOUT SECTION
+           Personal narrative, experience timeline,
+           and a photo placeholder.
+      ========================================== -->
+    <section class="about section" id="about" aria-labelledby="about-heading">
+      <div class="container about__layout">
+
+        <!-- Left column: photo + quick facts -->
+        <div class="about__visual">
+          <div class="about__photo-wrap">
+            <!--
+                Replace src with your actual photo.
+                The placeholder uses a CSS gradient.
+              -->
+            <div class="about__photo-placeholder" role="img" aria-label="Photo of Pranav Bhargav M"></div>
+          </div>
+
+          <!-- Quick stat cards -->
+          <div class="about__stats" aria-label="Learning highlights">
+            <div class="stat-card">
+              <span class="stat-card__number" id="stat-years">2024</span>
+              <span class="stat-card__label">Learning Since</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-card__number" id="stat-projects">DSA</span>
+              <span class="stat-card__label">Strong Foundation</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-card__number" id="stat-apis">Spring</span>
+              <span class="stat-card__label">Boot &amp; Microservices</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-card__number" id="stat-uptime">AWS</span>
+              <span class="stat-card__label">S3 &amp; Cloud</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column: narrative + timeline -->
+        <div class="about__content">
+          <div class="section__header section__header--left">
+            <span class="section__label">Who I am</span>
+            <h2 class="section__title" id="about-heading">About Me</h2>
+          </div>
+
+          <p class="about__text">
+            I'm a passionate backend-focused developer currently levelling up my skills
+            in building production-grade systems. I enjoy designing clean APIs,
+            thinking about scalability, and understanding how things work under the hood.
+          </p>
+          <p class="about__text">
+            I have a strong foundation in Data Structures &amp; Algorithms and I'm
+            actively expanding into the Spring Boot ecosystem, microservices architecture,
+            PostgreSQL, and cloud infrastructure on AWS.
+          </p>
+
+          <!-- Experience / Learning timeline -->
+          <div class="timeline" aria-label="Learning journey timeline">
+            <h3 class="timeline__heading">Journey</h3>
+
+            <ol class="timeline__list" role="list">
+              <li class="timeline__item">
+                <div class="timeline__marker" aria-hidden="true"></div>
+                <div class="timeline__body">
+                  <time class="timeline__date" datetime="2024">2024 – Present</time>
+                  <h4 class="timeline__role">Student &amp; Self-Taught Backend Developer</h4>
+                  <p class="timeline__company">Independent Learning · Remote</p>
+                  <p class="timeline__desc">
+                    Actively learning Spring Boot, microservices architecture,
+                    PostgreSQL, and AWS S3. Building hands-on projects to apply
+                    backend concepts in real-world scenarios.
+                  </p>
+                </div>
+              </li>
+
+              <li class="timeline__item">
+                <div class="timeline__marker" aria-hidden="true"></div>
+                <div class="timeline__body">
+                  <time class="timeline__date" datetime="2024">2024</time>
+                  <h4 class="timeline__role">Data Structures &amp; Algorithms</h4>
+                  <p class="timeline__company">Core CS Fundamentals</p>
+                  <p class="timeline__desc">
+                    Built a solid foundation in DSA — arrays, linked lists, trees,
+                    graphs, dynamic programming, and complexity analysis.
+                    Applied through consistent problem-solving practice.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+           CONTACT SECTION
+           Simple form + contact details.
+           The form submit handler in script.js is
+           wired to a placeholder; swap in a real
+           fetch() POST to /api/contact when ready.
+      ========================================== -->
+    <section class="contact section" id="contact" aria-labelledby="contact-heading">
+      <div class="container contact__layout">
+
+        <!-- Left: copy + details -->
+        <div class="contact__info">
+          <div class="section__header section__header--left">
+            <span class="section__label">Let's talk</span>
+            <h2 class="section__title" id="contact-heading">Get in Touch</h2>
+          </div>
+
+          <p class="contact__text">
+            I'm open to full-time roles, contract work, and interesting
+            open-source collaborations. Drop me a message and I'll get back
+            to you within 24 hours.
+          </p>
+
+          <ul class="contact__details" role="list" aria-label="Contact details">
+            <li class="contact__detail">
+              <span class="contact__detail-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                </svg>
+              </span>
+              <a href="mailto:pranavmahe06@gmail.com" class="contact__detail-link"
+                id="contact-email-link">pranavmahe06@gmail.com</a>
+            </li>
+            <li class="contact__detail">
+              <span class="contact__detail-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+              </span>
+              <a href="https://github.com/Pranav-mb-dev" target="_blank" rel="noopener" class="contact__detail-link"
+                id="contact-github-link">github.com/Pranav-mb-dev</a>
+            </li>
+            <li class="contact__detail">
+              <span class="contact__detail-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+              </span>
+              <a href="https://linkedin.com/in/" target="_blank" rel="noopener" class="contact__detail-link"
+                id="contact-linkedin-link">linkedin.com/in/pranav</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right: contact form -->
+        <div class="contact__form-wrap">
+          <!--
+              FORM NOTES FOR BACKEND INTEGRATION:
+              - Replace the form's action with your API endpoint, e.g. /api/contact
+              - The JS handler in script.js uses fetch() — just uncomment the real call
+              - Add CSRF tokens, rate limiting, and validation server-side
+            -->
+          <form class="contact-form" id="contact-form" novalidate aria-label="Contact form">
+            <div class="form-group">
+              <label class="form-label" for="contact-name">Name <span aria-hidden="true">*</span></label>
+              <input class="form-input" type="text" id="contact-name" name="name" autocomplete="name" required
+                aria-required="true" placeholder="Jane Smith" />
+              <span class="form-error" id="name-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-email">Email <span aria-hidden="true">*</span></label>
+              <input class="form-input" type="email" id="contact-email" name="email" autocomplete="email" required
+                aria-required="true" placeholder="jane@example.com" />
+              <span class="form-error" id="email-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-subject">Subject</label>
+              <input class="form-input" type="text" id="contact-subject" name="subject"
+                placeholder="Job opportunity / Collaboration / Other" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contact-message">Message <span aria-hidden="true">*</span></label>
+              <textarea class="form-input form-textarea" id="contact-message" name="message" rows="5" required
+                aria-required="true" placeholder="Tell me about your project or opportunity..."></textarea>
+              <span class="form-error" id="message-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <button class="btn btn--primary btn--full" type="submit" id="contact-submit-btn">
+              Send Message
+            </button>
+
+            <!-- Success / error feedback after submission -->
+            <div class="form-feedback" id="form-feedback" role="status" aria-live="polite" aria-atomic="true"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =============================================
+         FOOTER
+    ============================================= -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer__inner">
+      <p class="footer__copy">
+        &copy; <span id="footer-year"></span> Pranav Bhargav M. Built with HTML, CSS &amp; vanilla JS.
+      </p>
+      <nav aria-label="Footer navigation">
+        <ul class="footer__links" role="list">
+          <li><a href="#hero" class="footer__link">Top</a></li>
+          <li><a href="#skills" class="footer__link">Skills</a></li>
+          <li><a href="#projects" class="footer__link">Projects</a></li>
+          <li><a href="#contact" class="footer__link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- =============================================
+         BACK-TO-TOP BUTTON
+         Shown after the user scrolls down 400px.
+         Controlled by script.js.
+    ============================================= -->
+  <button class="back-to-top" id="back-to-top-btn" aria-label="Scroll back to top" hidden>
+    ↑
+  </button>
+
+  <!-- Main script — deferred so HTML parses first -->
+  <script src="script.js" defer></script>
+</body>
+
+</html>
