@@ -338,14 +338,46 @@ body::before {
 }
 
 /* Fine dot-grid overlay — sits above orbs, below content */
-.bg-grid {
+/* Gem floating animation */
+.gems-container {
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 28px 28px;
   pointer-events: none;
   z-index: 0;
+  overflow: hidden;
 }
+
+.bg-gem {
+  position: absolute;
+  /* positions set by JS */
+  opacity: 0.5;
+  will-change: transform;
+  animation: gem-float linear infinite;
+}
+
+@keyframes gem-float {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate(100px, 50px) rotate(90deg);
+  }
+
+  50% {
+    transform: translate(50px, 150px) rotate(180deg);
+  }
+
+  75% {
+    transform: translate(-50px, 50px) rotate(270deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+  }
+}
+
+
 
 img,
 svg,

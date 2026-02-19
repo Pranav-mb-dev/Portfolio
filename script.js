@@ -980,6 +980,9 @@ function init() {
   // Custom cursor
   initCustomCursor();
 
+  // Background gems
+  initGemBackground();
+
   // Add data-reveal to static HTML sections that aren't
   // dynamically rendered (hero content, about, contact info)
   const staticRevealTargets = [
@@ -1154,6 +1157,47 @@ function initCustomCursor() {
   }
 
   requestAnimationFrame(animate);
+}
+
+/* ============================================================
+   12. BACKGROUND ANIMATION — Floating Gems
+   ============================================================ */
+function initGemBackground() {
+  const container = document.getElementById('gems-container');
+  if (!container) return;
+
+  // Clear existing (if any)
+  container.innerHTML = '';
+
+  const gemCount = 20; // Number of floating gems
+  const gemSrc = 'assets/gem.png';
+
+  for (let i = 0; i < gemCount; i++) {
+    const gem = document.createElement('img');
+    gem.src = gemSrc;
+    gem.classList.add('bg-gem');
+    gem.alt = '';
+
+    // Random Properties
+    const size = Math.random() * 80 + 30; // 30px to 110px
+    const startX = Math.random() * 100;
+    const startY = Math.random() * 100;
+    const duration = Math.random() * 20 + 20; // 20s to 40s
+    const delay = Math.random() * -40; // Start at random point in cycle
+    const isReverse = Math.random() > 0.5;
+
+    gem.style.width = `${size}px`;
+    gem.style.left = `${startX}%`;
+    gem.style.top = `${startY}%`;
+    gem.style.animationDuration = `${duration}s`;
+    gem.style.animationDelay = `${delay}s`;
+
+    if (isReverse) {
+      gem.style.animationDirection = 'reverse';
+    }
+
+    container.appendChild(gem);
+  }
 }
 
 // Run after DOM is ready (script is deferred, so this fires immediately)
