@@ -94,7 +94,7 @@ const SKILL_ICONS = {
   // ── DevOps & Cloud ───────────────────────────────────────
   'Docker': CDN('docker', '2496ED'),
   'CI/CD Fundamentals': CDN('githubactions', '2088FF'),
-  'Object Storage (S3)': CDN('amazons3', '569A31'),
+  'Object Storage (S3)': CDN('amazonaws', '232F3E'),
 
   // ── Testing ──────────────────────────────────────────────
   'Unit Testing': CDN('junit5', '25A162'),
@@ -179,7 +179,7 @@ const SKILLS_DATA = [
     tags: [
       'Docker',
       'CI/CD Fundamentals',
-      'Object Storage (S3)',
+      'AWS Object Storage (S3)',
     ],
   },
   {
@@ -1090,13 +1090,12 @@ function initCustomCursor() {
   document.addEventListener('mousemove', e => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    dot.style.left = mouseX + 'px';
-    dot.style.top = mouseY + 'px';
+    // DOM update moved to animate() loop for performance
     document.body.classList.remove('cursor-hidden');
 
     const now = Date.now();
-    if (now - lastSpawn > 30) {
-      spawnParticles(mouseX, mouseY, 3, 3.5, 3);
+    if (now - lastSpawn > 40) { // Increased throttle to 40ms
+      spawnParticles(mouseX, mouseY, 2, 3.5, 3); // Slightly fewer particles per spawn
       lastSpawn = now;
     }
   });
@@ -1127,9 +1126,25 @@ function initCustomCursor() {
     if (e.target.closest(hoverTargets)) document.body.classList.remove('cursor-hovering');
   });
 
-  // Animation loop
-  function animate() {
+  // Animation loop (Throttled to ~30 FPS for performance)
+  let lastTime = 0;
+  function animate(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const elapsed = timestamp - lastTime;
+
+    if (elapsed < 32) { // Skip frame if less than ~33ms (target 30fps)
+      requestAnimationFrame(animate);
+      return;
+    }
+    lastTime = timestamp;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Update dot position using transform (GPU accelerated)
+    // Centering handled by CSS margin or translate if needed.
+    // Assuming top-left anchor, but if dot is small it's fine.
+    // If CSS has translate(-50%, -50%), we append:
+    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
 
     for (let i = particles.length - 1; i >= 0; i--) {
       const p = particles[i];
@@ -1169,7 +1184,7 @@ function initGemBackground() {
   // Clear existing (if any)
   container.innerHTML = '';
 
-  const gemCount = 20; // Number of floating gems
+  const gemCount = 15; // Reduced from 30 for performance
   const gemSrc = 'assets/gem.png';
 
   for (let i = 0; i < gemCount; i++) {
@@ -1179,8 +1194,21 @@ function initGemBackground() {
     gem.alt = '';
 
     // Random Properties
-    const size = Math.random() * 80 + 30; // 30px to 110px
-    const startX = Math.random() * 100;
+    const size = Math.random() * 25 + 15; // 15px to 40px
+
+    // Force balanced distribution with center fill
+    let startX;
+    if (i % 3 === 0) {
+      // Left side (0-15%)
+      startX = Math.random() * 15;
+    } else if (i % 3 === 1) {
+      // Right side (85-100%)
+      startX = Math.random() * 15 + 85;
+    } else {
+      // Center zone (15-85%)
+      startX = Math.random() * 70 + 15;
+    }
+
     const startY = Math.random() * 100;
     const duration = Math.random() * 20 + 20; // 20s to 40s
     const delay = Math.random() * -40; // Start at random point in cycle
@@ -1191,6 +1219,7 @@ function initGemBackground() {
     gem.style.top = `${startY}%`;
     gem.style.animationDuration = `${duration}s`;
     gem.style.animationDelay = `${delay}s`;
+    gem.style.opacity = Math.random() * 0.4 + 0.1; // 0.1 to 0.5
 
     if (isReverse) {
       gem.style.animationDirection = 'reverse';

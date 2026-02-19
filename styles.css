@@ -29,7 +29,12 @@
 
   --clr-neon-pink: #ff00cc;
   /* dark pink neon */
-  --clr-neon-glow: rgba(255, 0, 204, 0.5);
+  --clr-neon-glow: rgba(255, 0, 204, 0.6);
+
+  /* Neon Green */
+  --clr-neon-green: #39ff14;
+  --clr-neon-green-glow: rgba(57, 255, 20, 0.6);
+  --clr-neon-green-dim: rgba(57, 255, 20, 0.1);
 
   --clr-text: #e2e6f0;
   /* body text */
@@ -248,12 +253,12 @@ body::before {
 .bg-orb {
   position: fixed;
   border-radius: 50%;
-  filter: blur(40px);
+  /* Removed filter: blur(40px) for performance — gradient is smooth enough */
   pointer-events: none;
   z-index: 0;
   will-change: transform;
   backface-visibility: hidden;
-  /* Reduced blur radius and removed mix-blend-mode for better performance */
+  contain: paint;
 }
 
 /* Orb 1 — vivid indigo-blue, top-left */
@@ -844,23 +849,67 @@ h6 {
 }
 
 /* Real photo (once you add assets/photo.jpg) */
+/* Real photo with trendy stacked card effect */
+.hero__photo-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* Background morphing blob (trendy/organic) */
+.hero__photo-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle at 30% 30%, var(--clr-neon-red-dim), transparent 70%);
+  border: 2px solid var(--clr-neon-pink);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  z-index: -1;
+  animation: morph 8s ease-in-out infinite alternate;
+  transition: transform 0.4s ease;
+  will-change: border-radius;
+  opacity: 0.6;
+}
+
+.hero__photo-wrap:hover::before {
+  transform: scale(1.1);
+  opacity: 1;
+  background: radial-gradient(circle at 30% 30%, var(--clr-neon-green-glow), transparent 70%);
+}
+
 .hero__photo {
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
+  width: 320px;
+  height: 320px;
   object-fit: cover;
-  border: 3px solid var(--clr-border);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow:
-    0 0 0 6px rgba(108, 142, 255, 0.08),
-    var(--shadow-lg);
-  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  transform: rotate(4deg);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  will-change: transform;
 }
 
 .hero__photo:hover {
-  border-color: var(--clr-accent);
+  transform: rotate(0deg) scale(1.05);
   box-shadow:
-    0 0 0 6px rgba(108, 142, 255, 0.18),
-    var(--shadow-lg);
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    0 0 30px var(--clr-neon-glow);
+  border-color: var(--clr-neon-pink);
+}
+
+@keyframes morph {
+  0% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
 }
 
 /* Status badge */
@@ -986,9 +1035,22 @@ h6 {
 }
 
 .social-link:hover {
-  color: var(--clr-accent);
-  border-color: var(--clr-accent);
-  background: var(--clr-accent-glow);
+  color: var(--clr-neon-green);
+  border-color: var(--clr-neon-green);
+  background: var(--clr-neon-green-dim);
+  box-shadow:
+    0 0 12px var(--clr-neon-green-glow),
+    inset 0 0 5px var(--clr-neon-green-dim);
+  transform: translateY(-3px);
+}
+
+/* Specific override for the View Projects button */
+#hero-projects-btn:hover {
+  background: transparent;
+  color: var(--clr-neon-green);
+  border-color: var(--clr-neon-green);
+  box-shadow: 0 0 20px var(--clr-neon-green-glow);
+  text-shadow: 0 0 8px var(--clr-neon-green-glow);
 }
 
 /* Scroll hint */
@@ -1070,11 +1132,17 @@ h6 {
 
 .skill-card:hover {
   border-color: var(--clr-neon-pink);
+  background: linear-gradient(135deg, var(--clr-surface-2), rgba(255, 0, 204, 0.08));
+  /* Light pink fill */
   box-shadow:
     0 0 12px var(--clr-neon-glow),
     0 0 24px rgba(255, 0, 204, 0.1),
     var(--shadow-md);
-  transform: translateY(-4px) scale(1.02);
+  transform: translateY(-10px) scale(1.08);
+  /* Stronger lift */
+  z-index: 10;
+  filter: brightness(1.1);
+  /* Simulate nearing light source */
 }
 
 .skill-card:hover::before {
@@ -1116,8 +1184,12 @@ h6 {
 }
 
 .skill-tag:hover {
-  background: rgba(108, 142, 255, 0.16);
+  background: var(--clr-accent);
+  color: #fff;
   border-color: var(--clr-accent);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(108, 142, 255, 0.4);
+  cursor: default;
 }
 
 /* Icon wrapper — handles both emoji text and <img> CDN logos */
@@ -1293,8 +1365,13 @@ h6 {
 
 .project-card:hover {
   border-color: var(--clr-neon-pink);
-  transform: translateY(-5px) scale(1.02);
+  background: linear-gradient(135deg, var(--clr-surface), rgba(255, 0, 204, 0.08));
+  /* Light pink fill */
+  transform: translateY(-10px) scale(1.08);
+  z-index: 10;
+  filter: brightness(1.1);
   box-shadow:
+
     0 0 15px var(--clr-neon-glow),
     0 0 30px rgba(255, 0, 204, 0.15),
     var(--shadow-lg);
