@@ -1,4 +1,4 @@
-# Alex Morgan — Portfolio Website
+Pranav Bhargav M — Portfolio Website
 
 A minimal, dark-themed, fully responsive portfolio for a backend-focused software engineer.
 Built with **plain HTML, CSS, and vanilla JavaScript** — zero dependencies, zero build step.
