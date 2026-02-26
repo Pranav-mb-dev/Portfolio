@@ -212,70 +212,15 @@ const SKILLS_DATA = [
  */
 const PROJECTS_DATA = [
   {
-    icon: '🚀',
-    title: 'HyperRoute API Gateway',
+    icon: '🏏',
+    title: 'Crickify',
     description:
-      'A high-performance API gateway built in Go supporting rate limiting, JWT auth, request routing, and circuit breaking. Handles 50k+ req/s on modest hardware.',
-    tags: ['Go', 'Redis', 'Docker', 'Prometheus'],
-    categories: ['all', 'go', 'infrastructure'],
-    github: 'https://github.com/',
+      'An event-driven backend platform that treats every delivery as an immutable core event. Derives match states from a historical event log — ensuring 100% scoring accuracy and eliminating data sync issues. Scaled to handle high-traffic simulations with Redis caching, reducing API latency by 40%. Integrated Google Gemini API to transform raw ball-by-ball data into automated player performance insights and trend reports.',
+    tags: ['Java', 'Spring Boot', 'PostgreSQL', 'Redis', 'Docker', 'GCP', 'Gemini API'],
+    categories: ['all', 'java', 'backend', 'ai'],
+    github: 'https://github.com/Pranav-mb-dev',
     demo: null,
     featured: true,
-  },
-  {
-    icon: '📊',
-    title: 'DataStream Pipeline',
-    description:
-      'Real-time event ingestion pipeline using Kafka and Apache Flink. Processes 1M+ events/day with exactly-once semantics and dead-letter queue handling.',
-    tags: ['Java', 'Kafka', 'Flink', 'PostgreSQL', 'AWS'],
-    categories: ['all', 'java', 'data'],
-    github: 'https://github.com/',
-    demo: null,
-    featured: true,
-  },
-  {
-    icon: '🔐',
-    title: 'AuthForge',
-    description:
-      'OAuth 2.0 / OIDC identity provider with multi-tenant support, PKCE, refresh token rotation, and a self-service admin dashboard.',
-    tags: ['Python', 'FastAPI', 'PostgreSQL', 'Redis', 'Docker'],
-    categories: ['all', 'python', 'security'],
-    github: 'https://github.com/',
-    demo: 'https://example.com/',
-    featured: false,
-  },
-  {
-    icon: '🛒',
-    title: 'OrderFlow Microservices',
-    description:
-      'Event-driven order management system using CQRS and Saga pattern. Includes inventory, payment, and notification services communicating via RabbitMQ.',
-    tags: ['Java', 'Spring Boot', 'RabbitMQ', 'MongoDB', 'Kubernetes'],
-    categories: ['all', 'java', 'microservices'],
-    github: 'https://github.com/',
-    demo: null,
-    featured: false,
-  },
-  {
-    icon: '📈',
-    title: 'MetricsHub',
-    description:
-      'Lightweight observability SDK for Python services. Auto-instruments FastAPI and Django apps with OpenTelemetry traces, metrics, and structured logs.',
-    tags: ['Python', 'OpenTelemetry', 'Prometheus', 'Grafana'],
-    categories: ['all', 'python', 'infrastructure'],
-    github: 'https://github.com/',
-    demo: null,
-    featured: false,
-  },
-  {
-    icon: '🤖',
-    title: 'CronForge Scheduler',
-    description:
-      'Distributed job scheduler with a REST API, cron expression support, retry policies, and a web UI. Backed by PostgreSQL for durability.',
-    tags: ['Go', 'PostgreSQL', 'Docker', 'REST API'],
-    categories: ['all', 'go', 'infrastructure'],
-    github: 'https://github.com/',
-    demo: 'https://example.com/',
-    featured: false,
   },
 ];
 
@@ -283,12 +228,8 @@ const PROJECTS_DATA = [
 const PROJECT_FILTERS = [
   { label: 'All', value: 'all' },
   { label: 'Java', value: 'java' },
-  { label: 'Go', value: 'go' },
-  { label: 'Python', value: 'python' },
-  { label: 'Data', value: 'data' },
-  { label: 'Microservices', value: 'microservices' },
-  { label: 'Infrastructure', value: 'infrastructure' },
-  { label: 'Security', value: 'security' },
+  { label: 'Backend', value: 'backend' },
+  { label: 'AI', value: 'ai' },
 ];
 
 /** Typed tagline phrases — cycles in the hero section */
